@@ -1,9 +1,14 @@
-<owl-carousel-o [options]="customOptions">
+<owl-carousel-o [options]="customOptions" class="text-center">
   <ng-container *ngFor="let slide of slides">
     <ng-template carouselSlide [id]="slide.id">
-      <video>
-        <source [src]="slide.src" type="video/mp4" />
-      </video>
+      <iframe
+        width="90%"
+        height="315"
+        [src]="slide.src | safe: 'resourceUrl'"
+        frameborder="0"
+        allowfullscreen
+      >
+      </iframe>
     </ng-template>
   </ng-container>
 </owl-carousel-o>

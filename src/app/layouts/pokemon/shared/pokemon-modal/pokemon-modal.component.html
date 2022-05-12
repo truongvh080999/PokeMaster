@@ -1,0 +1,22 @@
+<section class="d-flex container py-3 align-items-center">
+  <img
+    [src]="pokemonDetail.sprites?.front_default"
+    [alt]="pokemonDetail.name"
+    class="w-25"
+  />
+  <div class="d-flex flex-column text-capitalize w-75">
+    <h2>{{ pokemonDetail.name }} #{{ pokemonDetail.id }}</h2>
+    <span>Height: {{ pokemonDetail.height | height }} feet</span>
+    <span>Weight: {{ pokemonDetail.weight | weight }} lbs</span>
+    <div
+      class="d-flex flex-wrap justify-content-between flex-column flex-md-row"
+    >
+      <span
+        class="text-capitalize w-100 w-md-50"
+        *ngFor="let stat of pokemonDetail.stats"
+      >
+        {{ stat.stat.name }}: {{ stat.base_stat }}
+      </span>
+    </div>
+  </div>
+</section>

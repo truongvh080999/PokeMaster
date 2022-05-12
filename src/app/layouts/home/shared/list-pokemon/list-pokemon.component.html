@@ -1,0 +1,11 @@
+<h2>Pokédex</h2>
+<section class="d-flex justify-content-between flex-wrap">
+  <pokemon
+    class="detail my-2 pointer"
+    *ngFor="let pokemon of listPokemon"
+    [pokemon]="pokemon"
+  ></pokemon>
+</section>
+<div class="w-100 text-center my-3">
+  <button class="btn btn-primary" (click)="getListPokemon()">Load more</button>
+</div>
