@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderModule } from './shared/header/header.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterModule } from './shared/footer/footer.module';
+import { HomeModule } from './layouts/home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HeaderModule,
     HttpClientModule,
+    FooterModule,
+    HomeModule,
+    BrowserAnimationsModule,
   ],
   providers: [ReusableService],
   bootstrap: [AppComponent],
