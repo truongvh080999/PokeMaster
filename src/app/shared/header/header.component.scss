@@ -1,0 +1,20 @@
+.logo {
+  width: 8%;
+}
+.menu {
+  position: absolute;
+}
+button.nav-link {
+  border: 0;
+  background: none;
+}
+@media (min-width: 476px) and(max-width: 768px) {
+  .logo {
+    width: 10%;
+  }
+}
+@media (max-width: 475px) {
+  .logo {
+    width: 25%;
+  }
+}

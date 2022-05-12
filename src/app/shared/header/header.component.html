@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <div class="container-fluid">
+    <img class="navbar-brand logo" src="assets/logos/logo.png" alt="logo" />
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="isMenuCollapsed = !isMenuCollapsed"
+    >
+      &#9776;
+    </button>
+
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <div class="col p-0">
+            <div ngbDropdown class="d-inline-block">
+              <button
+                type="button"
+                class="nav-link"
+                id="games"
+                ngbDropdownToggle
+              >
+                Games
+              </button>
+              <div ngbDropdownMenu aria-labelledby="games">
+                <button
+                  ngbDropdownItem
+                  *ngFor="let game of games"
+                  class="text-capitalize"
+                >
+                  {{ game.name }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="col p-0">
+            <div ngbDropdown class="d-inline-block">
+              <button
+                type="button"
+                class="nav-link"
+                id="generations"
+                ngbDropdownToggle
+              >
+                Generations
+              </button>
+              <div ngbDropdownMenu aria-labelledby="generations">
+                <button ngbDropdownItem>Action - 1</button>
+                <button ngbDropdownItem>Another Action</button>
+                <button ngbDropdownItem>Something else is here</button>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [href]="'.'"
+            (click)="isMenuCollapsed = !isMenuCollapsed"
+            >Locations</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [href]="'.'"
+            (click)="isMenuCollapsed = !isMenuCollapsed"
+            >Items</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
