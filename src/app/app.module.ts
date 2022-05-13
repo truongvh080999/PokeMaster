@@ -17,7 +17,6 @@ import { PokemonModule } from './layouts/pokemon/pokemon.module';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { HomePokemonState } from './layouts/home/shared/list-pokemon/store';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +34,6 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
     PokeModal,
     NgxsModule.forRoot([HomePokemonState, ListPokemonState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
   ],
   providers: [ReusableService],
   bootstrap: [AppComponent],
