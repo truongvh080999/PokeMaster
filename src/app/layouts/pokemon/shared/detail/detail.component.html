@@ -1,11 +1,26 @@
 <div
   class="w-100 d-flex flex-column text-center"
-  *ngIf="pokemonDetail"
+  *ngIf="pokemonDetail && !searching"
   (click)="showModal()"
 >
   <img
     [src]="pokemonDetail.sprites?.front_default"
     [alt]="pokemonDetail.name"
   />
-  <span class="name text-capitalize">{{ pokemonDetail.name }}</span>
+  <span class="name text-capitalize">{{
+    pokemonDetail.name?.replaceAll("-", " ")
+  }}</span>
+</div>
+<div
+  class="w-100 d-flex flex-column text-center"
+  *ngIf="searching && (pokemonSearch$ | async) as pokemonDetail"
+  (click)="showModal()"
+>
+  <img
+    [src]="pokemonDetail.sprites?.front_default"
+    [alt]="pokemonDetail.name"
+  />
+  <span class="name text-capitalize">{{
+    pokemonDetail.name?.replaceAll("-", " ")
+  }}</span>
 </div>

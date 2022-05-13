@@ -1,4 +1,7 @@
-<section class="d-flex container py-3 align-items-center">
+<section
+  class="d-flex container py-3 align-items-center"
+  *ngIf="pokemonDetail$ | async as pokemonDetail"
+>
   <img
     [src]="pokemonDetail.sprites?.front_default"
     [alt]="pokemonDetail.name"
@@ -15,7 +18,7 @@
         class="text-capitalize w-100 w-md-50"
         *ngFor="let stat of pokemonDetail.stats"
       >
-        {{ stat.stat.name }}: {{ stat.base_stat }}
+        {{ stat.stat.name.replaceAll("-", " ") }}: {{ stat.base_stat }}
       </span>
     </div>
   </div>

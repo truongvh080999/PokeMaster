@@ -1,26 +1,27 @@
-import { ReusableService } from './../../../../services/api/reusable.service';
-import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ClearList, HomePokemonState, LoadPokemons } from './store';
 
 @Component({
   selector: 'list-pokemon',
   templateUrl: './list-pokemon.component.html',
   styleUrls: ['./list-pokemon.component.scss'],
 })
-export class ListPokemonComponent implements OnInit {
-  listPokemon: { name: string; url: string }[] = [];
+export class ListPokemonComponent implements OnInit, OnDestroy {
+  listPokemon$ = this.store.select(HomePokemonState.pokemons);
   filter = {
     offset: 0,
     limit: 10,
   };
-  constructor(private reusableService: ReusableService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.getListPokemon();
   }
   getListPokemon() {
-    this.reusableService.getMethod('pokemon', this.filter).subscribe((res) => {
-      this.listPokemon = [...this.listPokemon, ...res.results];
-      this.filter.offset = this.listPokemon.length;
-    });
+    this.store.dispatch(new LoadPokemons());
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(new ClearList());
   }
 }

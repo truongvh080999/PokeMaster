@@ -1,3 +1,4 @@
+import { ListPokemonState } from './layouts/pokemon/store/state';
 import { PokemonModalModule as PokeModal } from './layouts/pokemon/shared/pokemon-modal/pokemon-modal.module';
 import { PokemonModalModule } from './layouts/home/shared/list-pokemon/shared/pokemon-modal/pokemon-modal.module';
 import { ReusableService } from './services/api/reusable.service';
@@ -13,6 +14,10 @@ import { FooterModule } from './shared/footer/footer.module';
 import { HomeModule } from './layouts/home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PokemonModule } from './layouts/pokemon/pokemon.module';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { HomePokemonState } from './layouts/home/shared/list-pokemon/store';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +33,9 @@ import { PokemonModule } from './layouts/pokemon/pokemon.module';
     PokemonModalModule,
     PokemonModule,
     PokeModal,
+    NgxsModule.forRoot([HomePokemonState, ListPokemonState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
   ],
   providers: [ReusableService],
   bootstrap: [AppComponent],

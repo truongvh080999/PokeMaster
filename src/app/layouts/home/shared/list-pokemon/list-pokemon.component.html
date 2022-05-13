@@ -2,7 +2,7 @@
 <section class="d-flex justify-content-between flex-wrap">
   <pokemon
     class="detail my-2 pointer"
-    *ngFor="let pokemon of listPokemon"
+    *ngFor="let pokemon of (listPokemon$ | async) || []"
     [pokemon]="pokemon"
   ></pokemon>
 </section>

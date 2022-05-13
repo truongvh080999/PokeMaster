@@ -4,3 +4,19 @@
     margin-right: 1rem;
   }
 }
+.detail {
+  width: 18%;
+}
+select {
+  width: 3rem;
+}
+@media (min-width: 476px) and(max-width:768px) {
+  .detail {
+    width: calc(100% / 4);
+  }
+}
+@media (max-width: 475px) {
+  .detail {
+    width: 45%;
+  }
+}

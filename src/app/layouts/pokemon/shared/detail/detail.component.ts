@@ -1,7 +1,10 @@
+import { ListPokemonState } from './../../store/state';
+import { Store } from '@ngxs/store';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReusableService } from 'src/app/services/api/reusable.service';
 import { PokemonModalComponent } from '../pokemon-modal/pokemon-modal.component';
+import { LoadPokemon } from '../../store';
 
 @Component({
   selector: 'pokemon',
@@ -9,27 +12,32 @@ import { PokemonModalComponent } from '../pokemon-modal/pokemon-modal.component'
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent implements OnInit {
-  @Input() pokemon!: { name: string; url: string };
+  @Input() pokemon: { name: string; url: string } = { name: '', url: '' };
+  @Input() searching: boolean = false;
+  pokemonSearch$ = this.store.select(ListPokemonState.pokemon);
   pokemonDetail: any;
   constructor(
     private reusableService: ReusableService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.getPokemon();
   }
   getPokemon() {
-    const pokemonUrlSplit = this.pokemon.url.split('/');
-    const pokemonId = pokemonUrlSplit[pokemonUrlSplit.length - 2];
-    this.reusableService.getMethod(`pokemon/${pokemonId}`).subscribe((res) => {
-      this.pokemonDetail = { ...res };
-    });
+    this.reusableService
+      .getMethod(`pokemon/${this.pokemon.name}`)
+      .subscribe((res) => {
+        this.pokemonDetail = { ...res };
+      });
   }
   showModal() {
-    const modalRef = this.modalService.open(PokemonModalComponent, {
+    this.modalService.open(PokemonModalComponent, {
       centered: true,
     });
-    modalRef.componentInstance.pokemonDetail = this.pokemonDetail;
+    if (!this.searching) {
+      this.store.dispatch(new LoadPokemon(this.pokemonDetail));
+    }
   }
 }

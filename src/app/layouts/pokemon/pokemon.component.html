@@ -1,10 +1,49 @@
 <section class="container d-flex flex-column">
-  <div class="d-flex search align-items-center">
+  <div
+    class="d-flex search align-items-start align-items-md-center flex-column flex-md-row"
+  >
     <h4 class="search-title">Name or Number</h4>
     <input
+      matInput
       class="search-input col-12 col-lg-6 form-control"
       type="text"
       [formControl]="search"
     />
+  </div>
+
+  <select
+    [(ngModel)]="paging"
+    class="form-select"
+    (change)="getData(true)"
+    *ngIf="!onSearch"
+  >
+    <option [value]="10">10</option>
+    <option [value]="20">20</option>
+    <option [value]="50">50</option>
+    <option [value]="100">100</option>
+  </select>
+  <section class="d-flex justify-content-between flex-wrap">
+    <pokemon
+      class="detail my-2 pointer"
+      *ngFor="let pokemon of listPokemon$ | async"
+      [pokemon]="pokemon"
+    ></pokemon>
+  </section>
+
+  <pokemon
+    class="detail my-2 pointer"
+    *ngIf="!(listPokemon$ | async)?.length"
+    [searching]="onSearch"
+  ></pokemon>
+  <div
+    *ngIf="!(listPokemon$ | async)?.length && !(searchPokemon$ | async)"
+    class="not-found"
+  >
+    <h3 class="message">No Pokémon Matched Your Search!</h3>
+  </div>
+  <div class="w-100 text-center my-3">
+    <button class="btn btn-primary" (click)="getData(false)" *ngIf="!onSearch">
+      Load more
+    </button>
   </div>
 </section>
